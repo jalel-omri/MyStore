@@ -1,0 +1,58 @@
+<app-header>
+</app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 mt-5 mb-3">
+            <h1>Liste de vos Achats </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div *ngIf="produits.length==0" class="alert alert-warning">there is no produits</div>
+            <div>          <a class="btn btn-success" ><ion-icon name="cart-outline"></ion-icon> shopping_cart <span style="border-radius: 10000px;padding:5px;background-color: red;text-decoration-style: solid;" >{{Cart}}</span></a>
+                <button class="btn btn-primary my-2 my-sm-0" style="margin-left: 15px;" (click)="commander()"> Lancer une commande </button>
+            </div>
+            <table  class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        
+                        <th>image du produit</th>
+                        <th>nom du produit</th>
+                        <th>description</th>
+                        <th>prix</th>
+                        <th>discount</th>
+                        <th>state</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let produit of produits;let i = index">
+                        <th>{{i}}</th> 
+                      
+                        <td><img src="data:image/png;base64,{{produit.improd}}"width="80" height="80" ></td>
+                        <td>{{produit.namprod}}</td>
+                        <td>{{produit.descprod}}</td>
+                        <td>{{produit.priprod}}</td>
+                        <td *ngIf="produit.discprod">{{produit.discprod}} % </td>
+                        <td *ngIf="!produit.discprod">Pas de PROMO </td>
+                        <td>
+                            <span *ngIf="produit.discprod" class="badge badge-pill badge-success">Promo </span>
+                            <span *ngIf="!produit.discprod" class="badge badge-pill badge-danger">No Promo</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-info mr-2" [routerLink]="['/produits',produit.id]"><i class="fas fa-tasks"></i>Voir Produit</button>
+                             
+                            <button class="btn btn-danger" ><i class="far fa-trash-alt"></i> Supprimer du chariot </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+       
+        </div>
+    </div>
+  
+</div>

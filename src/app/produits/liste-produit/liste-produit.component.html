@@ -1,0 +1,79 @@
+<app-header>
+</app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 mt-5 mb-3">
+            <h1>Liste de produits </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div *ngIf="produits.length==0" class="alert alert-warning">there is no produits</div>
+            <div> <a class="btn btn-success" *ngIf="!admin">
+                    <ion-icon name="cart-outline"></ion-icon> shopping_cart <span
+                        style="border-radius: 10000px;padding:5px;background-color: red;text-decoration-style: solid;">{{Cart}}</span>
+                </a>
+            </div>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>#</th>
+
+                        <th>image du produit</th>
+                        <th>nom du produit</th>
+                        <th>description</th>
+                        <th>prix</th>
+                        <th>discount</th>
+                        <th>state</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let produit of produits;let i = index">
+                        <th>{{i}}</th>
+
+                        <td><img src="data:image/png;base64,{{produit.improd}}" width="80" height="80"></td>
+                        <td>{{produit.namprod}}</td>
+                        <td>{{produit.descprod}}</td>
+                        <td>{{produit.priprod}}</td>
+                        <td *ngIf="produit.discprod">{{produit.discprod}} % </td>
+                        <td *ngIf="!produit.discprod">Pas de PROMO </td>
+                        <td>
+                            <span *ngIf="produit.discprod" class="badge badge-pill badge-success">Promo </span>
+                            <span *ngIf="!produit.discprod" class="badge badge-pill badge-danger">No Promo</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-info mr-2" [routerLink]="['/produits',produit.id]"><i
+                                    class="fas fa-tasks"></i>Voir Produit</button>
+                            <button *ngIf="produit.stock&& !admin" class="btn btn-success mr-2"
+                                (click)="addToCart(produit)">
+                                <ion-icon name="cart-outline"></ion-icon>add to cart
+                            </button>
+                            <button *ngIf="!produit.stock&& !admin" class="btn btn-danger mr-2"><i
+                                    class="fas fa-user-times"></i>Non disponible </button>
+                            <button *ngIf="admin" class="btn btn-danger" (click)="deleteProduit(produit)"><i
+                                    class="far fa-trash-alt"></i>Supprimer ce produit</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                            <td>Nouveau produit</td>
+                            <td><label for="fileToUpload"> Image du produit</label><img [src]="imgURL" height="200" *ngIf="imgURL"><input type="file" name="fileToUpload" (change)="onFileChanged($event)"id="fileToUpload">
+                            <td><input type="text" id="namprod"></td>
+                            <td><input type="text" id="descprod"></td>
+                            <td><input type="text" id="priprod" ></td>
+                            <td><input type="text" id="discprod" value="0"></td>
+                            <td><input type="text" id="quantity"></td>
+                            <td ><button type="submit" class="btn btn-success mr-2" (click)="addProduct()"> Ajouter un produit</button> </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+</div>

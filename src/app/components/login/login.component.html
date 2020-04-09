@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="container">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Email"
+        formControlName="Email">
+      <div *ngIf="Email.touched && Email.invalid">
+        <small *ngIf="Email.errors.required" class="form-text text-danger">Email Required</small>
+        <small *ngIf="Email.errors.email" class="form-text text-danger">Invalid Email</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" name="Password" formControlName="Password">
+      <div *ngIf="Password.touched && Password.invalid">
+        <small *ngIf="Password.errors.required"  class="form-text text-danger">Password Required</small>
+        <small *ngIf="Password.errors.minlength" class="form-text text-danger">Invalid Password</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid" >Login</button>
+  </form>
+</div>

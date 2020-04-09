@@ -1,0 +1,70 @@
+<app-header></app-header>
+
+<div class="container">
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" class="form-control" id="Prenom" name="Prenom" formControlName="prenom">
+                    <div *ngIf="prenom.touched && prenom.invalid">
+                        <small *ngIf="prenom.errors.required" class="form-text text-danger">Prénom Requis !</small>
+                        <small *ngIf="prenom.errors.pattern" class="form-text text-danger">Prénom Invalide</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Name">Nom</label>
+                    <input type="text" class="form-control" id="Name" name="Name" formControlName="name">
+                    <div *ngIf="name.touched && name.invalid">
+                        <small *ngIf="name.errors.required" class="form-text text-danger">nom Requis !</small>
+                        <small *ngIf="name.errors.pattern" class="form-text text-danger"> nom Invalide </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Email">Email address</label>
+                    <input type="email" class="form-control" id="Email" name="Email" formControlName="email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <div *ngIf="email.touched && email.invalid">
+                        <small *ngIf="email.errors.required" class="form-text text-danger">Email Required</small>
+                        <small *ngIf="email.errors.email" class="form-text text-danger">Invalid Email</small>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" formControlName="password">
+                    <div *ngIf="password.touched && password.invalid">
+                        <small *ngIf="password.errors.required" class="form-text text-danger">Password Required</small>
+                        <small *ngIf="password.errors.minlength" class="form-text text-danger">Invalid Password</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="repassword">Confirm Password</label>
+                    <input type="repassword" class="form-control" id="repassword" name="repassword" formControlName="repassword">
+                    <div *ngIf="repassword.touched && repassword.invalid">
+                        <small *ngIf="repassword.errors.required" class="form-text text-danger">Confirm Password Required</small>
+                    </div>
+                    <small *ngIf="repassword.valid && repassword.value != password.value" class="form-text text-danger">Password and confirm password does not match</small>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid || repassword.value != password.value">Submit</button>
+    </form>
+</div>

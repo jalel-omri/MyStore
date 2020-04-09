@@ -1,0 +1,48 @@
+<app-header>
+</app-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 mt-5 mb-3">
+            <h1>Liste de vos Achats </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div *ngIf="commands.length==0" class="alert alert-warning">there is no produits</div>
+            <table  class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Numèro de la commande </th>
+                        
+                        <th>Identifiant client</th>
+                        <th>Identifiant produit</th>
+                        <th>Quantité</th>
+                        <th>Date de la commande</th>
+                        <th>Etat de la commande</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let command of commands;let i = index">
+                        <th>{{command.idCom}}</th> 
+                        <td>{{command.idAcheteur}}</td>
+                        <td>{{command.idProduit}}</td>
+                        <td>{{command.quantity}}</td>
+                        <td >{{command.date}}  </td>
+                        
+                        <td>
+                            <span *ngIf='command.livraison.localeCompare("non livrée")!=0' class="badge badge-pill badge-success"> Livrée </span>
+                            <span *ngIf='command.livraison.localeCompare("non livrée")==0' class="badge badge-pill badge-danger">Non livrée</span>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+            
+       
+        </div>
+    </div>
+  
+</div>
