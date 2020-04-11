@@ -37,10 +37,10 @@
                 </div>
                 <div class="section"
                     style="padding-bottom:20px;background:#f8f9f9;align-content: center;">
-                    <button *ngIf="!inCart"class="btn btn-success" (click)="addToCart()">
+                    <button *ngIf="!produit.inCart"class="btn btn-success" (click)="addToCart()">
                         <ion-icon name="cart-outline"></ion-icon> Add to cart
                     </button>
-                    <button *ngIf="inCart" class="btn btn-danger my-2 my-sm-0" (click)="addToCart()" > <ion-icon name="cart-outline"></ion-icon>drop from cart</button>
+                    <button *ngIf="produit.inCart" class="btn btn-danger my-2 my-sm-0" (click)="removeFromCart()" > <ion-icon name="cart-outline"></ion-icon>drop from cart</button>
                     
                 </div>
 

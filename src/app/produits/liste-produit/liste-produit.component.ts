@@ -29,6 +29,15 @@ export class ListeProduitComponent implements OnInit {
       (produitsFromDb)=>{
         this.produits = produitsFromDb
         console.log(produitsFromDb);
+        let achats=JSON.parse(localStorage.getItem("achats"));
+      
+        this.produits.forEach(prod => {
+          prod.inCart=false;
+          for(let element of achats){
+            if(element.id==prod.id)
+             prod.inCart=true;
+          };
+        });
         this.isAdmin();
       },
       (error)=>{
@@ -56,34 +65,43 @@ export class ListeProduitComponent implements OnInit {
 
   }
 
-  addToCart(produit){
-    let inCart=false;
+  addToCart(i){
+    
     let achats=JSON.parse(localStorage.getItem("achats"));
-    for(let a of achats){
-      if(a.id==produit.id){
-        inCart=true;
-        console.log(a.id+" "+produit.id);
-      }
-    }
-    if(!inCart){
+  
+    if(!this.produits[i].inCart){
       console.log("produit ajouté !");
-      produit.quantity=this.command;
-      achats.push(produit);
+      this.produits[i].quantity=this.command;
+      achats.push(this.produits[i]);
       this.achats=achats;
       localStorage.removeItem("achats");
       localStorage.setItem("achats",JSON.stringify(achats));
   //  document.getElementById("nbProd").textContent=this.cart.toString();
-    
+      this.produits[i].inCart=true;
 
-    let nbCommand=1;
-    nbCommand=nbCommand+JSON.parse(localStorage.getItem("qte"));  
+      let nbCommand=1;
+      nbCommand=nbCommand+JSON.parse(localStorage.getItem("qte"));  
+      this.Cart=nbCommand;  
+      localStorage.setItem("qte",nbCommand.toString());
+
+    }
+    
+  }
+
+  dropFromCart(i,produit){
+    this.produits[i].inCart=false;
+    let achats=JSON.parse(localStorage.getItem("achats"));
+    for(let element of achats){
+      if(produit.id==element.id)
+       achats.splice(i, 1);
+    };
+    this.achats=achats;
+    localStorage.removeItem("achats");
+    localStorage.setItem("achats",JSON.stringify(achats));
+    let nbCommand;
+    nbCommand=JSON.parse(localStorage.getItem("qte"))-1;  
     this.Cart=nbCommand;  
     localStorage.setItem("qte",nbCommand.toString());
-
-    }else{
-    
-    console.log("produit existe déja !");}
-    
   }
 
   deleteProduit(produit){

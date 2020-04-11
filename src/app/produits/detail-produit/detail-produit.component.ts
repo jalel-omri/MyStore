@@ -15,9 +15,8 @@ export class DetailProduitComponent implements OnInit {
   idProd:String;
   idUser:String;
   command=1;
- 
    produit=null;
-   inCart=false;
+   
   achats=[];
   constructor(private _prodServ:ProduitsService,private route:ActivatedRoute) {
     
@@ -25,14 +24,13 @@ export class DetailProduitComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let token = localStorage.getItem('myTtoken');
     
      this.idProd = this.route.snapshot.paramMap.get('Idprod');
-    
+     this.achats=JSON.parse(localStorage.getItem("achats"));
 
     this.getProduit();
     
-    this.achats=JSON.parse(localStorage.getItem("achats"));
+   
     let nbCommand=0;
     nbCommand=nbCommand+JSON.parse(localStorage.getItem("qte"));
     localStorage.setItem("qte",nbCommand.toString());
@@ -42,6 +40,12 @@ export class DetailProduitComponent implements OnInit {
     this._prodServ.getProduit(this.idProd).subscribe(
       res => {
         this.produit = res;
+        this.produit.inCart=false;
+        this.achats.forEach(element => {
+          if(element.id==this.idProd){
+            this.produit.inCart=true;
+          }
+        });
         console.log(res);
        
       },
@@ -66,13 +70,10 @@ export class DetailProduitComponent implements OnInit {
   }
   addToCart(){
     
+    
     let achats=JSON.parse(localStorage.getItem("achats"));
-    for(let a of achats){
-      if(a.id==this.produit.id){
-        this.inCart=true;
-      }
-    }
-    if(!this.inCart){
+  
+    if(!this.produit.inCart){
       console.log("produit ajouté !");
       this.produit.quantity=this.command;
       achats.push(this.produit);
@@ -80,19 +81,31 @@ export class DetailProduitComponent implements OnInit {
       localStorage.removeItem("achats");
       localStorage.setItem("achats",JSON.stringify(achats));
   //  document.getElementById("nbProd").textContent=this.cart.toString();
-    
+      this.produit.inCart=true;
 
-    let nbCommand=1;
-    nbCommand=nbCommand+JSON.parse(localStorage.getItem("qte"));    
-    localStorage.setItem("qte",nbCommand.toString());
-
-    }else{
-    console.log("produit existe déja !");}
+      let nbCommand=1;
+      nbCommand=nbCommand+JSON.parse(localStorage.getItem("qte"));  
+  
+      localStorage.setItem("qte",nbCommand.toString());
     
   }
+}
 
   removeFromCart(){
-        
+    this.produit.inCart=false;
+    let achats=JSON.parse(localStorage.getItem("achats"));
+    let index=0;
+    for(let element of achats){
+      if(this.produit.id==element.id)
+       achats.splice(index, 1);
+       index=index+1;
+    };
+    this.achats=achats;
+    localStorage.removeItem("achats");
+    localStorage.setItem("achats",JSON.stringify(achats));
+    let nbCommand;
+    nbCommand=JSON.parse(localStorage.getItem("qte"))-1;   
+    localStorage.setItem("qte",nbCommand.toString());
   }
 
 }

@@ -47,9 +47,13 @@
                         <td>
                             <button class="btn btn-info mr-2" [routerLink]="['/produits',produit.id]"><i
                                     class="fas fa-tasks"></i>Voir Produit</button>
-                            <button *ngIf="produit.stock&& !admin" class="btn btn-success mr-2"
-                                (click)="addToCart(produit)">
+                            <button *ngIf="produit.stock&& !admin && !produit.inCart " class="btn btn-success mr-2"
+                                (click)="addToCart(i)">
                                 <ion-icon name="cart-outline"></ion-icon>add to cart
+                            </button>
+                            <button *ngIf="produit.inCart " class="btn btn-danger"
+                                (click)="dropFromCart(i,produit)">
+                                <ion-icon name="cart-outline"></ion-icon>Drop From cart
                             </button>
                             <button *ngIf="!produit.stock&& !admin" class="btn btn-danger mr-2"><i
                                     class="fas fa-user-times"></i>Non disponible </button>
