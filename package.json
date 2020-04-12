@@ -3,13 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-<<<<<<< HEAD
-    "start": "ng serve ",
-||||||| c4e2139
     "start": "node server.js",
-=======
-    "start": "ng serve",
->>>>>>> 276d775c11f349350d3575b0242e739821ad371d
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -57,17 +51,10 @@
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
     "typescript": "~3.7.5"
-<<<<<<< HEAD
-  },
-  "engines": {
-    "node": "~12.16.0",
-    "npm": "~6.13.4"
-||||||| c4e2139
-=======
   },
   "engines": {
     "node" : "~12.16.0",
     "npm" : "~6.13.4"
->>>>>>> 276d775c11f349350d3575b0242e739821ad371d
+
   }
 }
