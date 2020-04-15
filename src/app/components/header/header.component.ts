@@ -10,9 +10,12 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   
   constructor(private router:Router ) { }
-token:any;
+token=false;
   ngOnInit(): void {
-    this.token=localStorage.getItem("myToken");
+    let token=localStorage.getItem("myToken");
+    if(token){
+      this.token=true;
+    }
     
   }
 
