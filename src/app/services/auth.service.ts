@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private _loginUrl = "https://localhost:44337/login";
-  private _registerUrl="https://localhost:44337/register";
+  private _loginUrl = "https://my4storeapi.herokuapp.com/login";
+  private _registerUrl="https://my4storeapi.herokuapp.com/register";
   
 
   constructor(private http: HttpClient, private router: Router) { }

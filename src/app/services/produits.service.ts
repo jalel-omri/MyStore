@@ -5,12 +5,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProduitsService {
-  private _getAllProductsUrl = "https://localhost:44337/api/produit";
-  private _deleteProdUrl="https://localhost:44337/produit/DeleteProduit/";
-  private _prodUrl="https://localhost:44337/produit/";
-  private _commandUrl="https://localhost:44337/command/"
-  private _getAllCommandUrl="https://localhost:44337/AllCommands/";
-  private _addProductUrl="https://localhost:44337/addProduct/";
+  private _getAllProductsUrl = "https://my4storeapi.herokuapp.com/api/produit";
+  private _deleteProdUrl="https://my4storeapi.herokuapp.com/produit/DeleteProduit/";
+  private _prodUrl="https://my4storeapi.herokuapp.com/produit/";
+  private _commandUrl="https://my4storeapi.herokuapp.com/command/"
+  private _getAllCommandUrl="https://my4storeapi.herokuapp.com/AllCommands/";
+  private _addProductUrl="https://my4storeapi.herokuapp.com/addProduct/";
   constructor(private http: HttpClient) { }
 
 getAllProducts() {

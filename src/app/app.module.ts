@@ -18,6 +18,7 @@ import { CommandComponent } from './produits/command/command.component';
 import { ListCommandsComponent } from './produits/list-commands/list-commands.component';
 import { Page404Component } from './components/page404/page404.component';
 import { Page401Component } from './components/page401/page401.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { Page401Component } from './components/page401/page401.component';
     ListCommandsComponent,
     Page404Component,
     Page401Component,
+    HomeComponent,
   ],
   imports: [BrowserModule,
     AppRoutingModule,
