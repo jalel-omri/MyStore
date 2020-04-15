@@ -1,0 +1,24 @@
+
+
+<nav class="navbar navbar-expand-md navbar-light  bg-light">
+  <a [routerLink]="['/']">
+    <h1 style="background:#f8f9f9;">My Store</h1>
+  </a>
+  
+    
+  
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/']">Home</a>
+          </li>
+  
+      </ul>
+      
+      <form class="form-inline my-2 my-lg-0">
+        <button *ngIf="token==null" class="btn btn-primary my-2 my-sm-0" [routerLink]="['/login']">Login</button>
+        <button *ngIf="token==null" class="btn btn-info my-2 my-sm-0 mx-3" [routerLink]="['/register']">register</button>
+        <button *ngIf="token!=null" class="btn btn-danger my-2 my-sm-0" (click)="logout()" >logout</button>
+      </form>
+    </div>
+  </nav>

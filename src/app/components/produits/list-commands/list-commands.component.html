@@ -10,7 +10,9 @@
 
     <div class="row">
         <div class="col">
-            <div *ngIf="commands.length==0" class="alert alert-warning">there is no produits</div>
+            <div *ngIf="commands.length==0" class="alert alert-warning">All commands </div>
+            <div> <button class="btn btn-primary my-2 my-sm-0" style="margin-left: 15px;"  [routerLink]="['/produits']">
+                Return to products list </button></div>
             <table  class="table table-sm">
                 <thead>
                     <tr>

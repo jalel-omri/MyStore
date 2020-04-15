@@ -25,6 +25,7 @@ export class ListeProduitComponent implements OnInit {
   constructor(private _productService:ProduitsService) { }
 
   ngOnInit(): void {
+    this.isAdmin();
     this._productService.getAllProducts().subscribe(
       (produitsFromDb)=>{
         this.produits = produitsFromDb
@@ -33,12 +34,14 @@ export class ListeProduitComponent implements OnInit {
       
         this.produits.forEach(prod => {
           prod.inCart=false;
+          if(achats!=null){
           for(let element of achats){
             if(element.id==prod.id)
              prod.inCart=true;
-          };
+            }
+          }
         });
-        this.isAdmin();
+        
       },
       (error)=>{
         console.log(error);

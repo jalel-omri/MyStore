@@ -10,14 +10,16 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   
   constructor(private router:Router ) { }
-
+token:any;
   ngOnInit(): void {
-    
+    this.token=localStorage.getItem("myToken");
     
   }
 
   logout(){
     localStorage.removeItem("myToken");
+    localStorage.removeItem("qte");
+    localStorage.removeItem("achats");
     this.router.navigate(['/login']);
   }
 

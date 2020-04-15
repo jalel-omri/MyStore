@@ -3,19 +3,19 @@ import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { ListeProduitComponent } from './produits/liste-produit/liste-produit.component';
+import { ListeProduitComponent } from './components/produits/liste-produit/liste-produit.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProduitsService } from './services/produits.service';
 import { AuthService } from './services/auth.service';
 import { RegisterComponent } from './components/register/register.component';
-import { DetailProduitComponent } from './produits/detail-produit/detail-produit.component';
-import { CommandComponent } from './produits/command/command.component';
-import { ListCommandsComponent } from './produits/list-commands/list-commands.component';
+import { DetailProduitComponent } from './components/produits/detail-produit/detail-produit.component';
+import { CommandComponent } from './components/produits/command/command.component';
+import { ListCommandsComponent } from './components/produits/list-commands/list-commands.component';
 import { Page404Component } from './components/page404/page404.component';
 import { Page401Component } from './components/page401/page401.component';
 import { HomeComponent } from './components/home/home.component';

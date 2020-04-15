@@ -15,6 +15,12 @@
                     <ion-icon name="cart-outline"></ion-icon> shopping_cart <span
                         style="border-radius: 10000px;padding:5px;background-color: red;text-decoration-style: solid;">{{Cart}}</span>
                 </a>
+                <button class="btn btn-primary my-2 my-sm-0" style="margin-left: 15px;" *ngIf="!admin" [routerLink]="['/command']">
+                    Lancer une commande </button>
+
+                    <button class="btn btn-primary my-2 my-sm-0" style="margin-left: 15px;" *ngIf="admin" [routerLink]="['/Allcommands']">
+                        Voir toutes les commandes</button>
+    
             </div>
             <table class="table table-sm">
                 <thead>
@@ -51,8 +57,7 @@
                                 (click)="addToCart(i)">
                                 <ion-icon name="cart-outline"></ion-icon>add to cart
                             </button>
-                            <button *ngIf="produit.inCart " class="btn btn-danger"
-                                (click)="dropFromCart(i,produit)">
+                            <button *ngIf="produit.inCart " class="btn btn-danger" (click)="dropFromCart(i,produit)">
                                 <ion-icon name="cart-outline"></ion-icon>Drop From cart
                             </button>
                             <button *ngIf="!produit.stock&& !admin" class="btn btn-danger mr-2"><i
@@ -61,17 +66,20 @@
                                     class="far fa-trash-alt"></i>Supprimer ce produit</button>
                         </td>
                     </tr>
-                    <tr>
-                        
-                            <td>Nouveau produit</td>
-                            <td><label for="fileToUpload"> Image du produit</label><img [src]="imgURL" height="200" *ngIf="imgURL"><input type="file" name="fileToUpload" (change)="onFileChanged($event)"id="fileToUpload">
-                            <td><input type="text" id="namprod"></td>
-                            <td><input type="text" id="descprod"></td>
-                            <td><input type="text" id="priprod" ></td>
-                            <td><input type="text" id="discprod" value="0"></td>
-                            <td><input type="text" id="quantity"></td>
-                            <td ><button type="submit" class="btn btn-success mr-2" (click)="addProduct()"> Ajouter un produit</button> </td>
-                        
+                    <tr *ngIf="admin">
+
+                        <td>Nouveau produit</td>
+                        <td><label for="fileToUpload"> Image du produit</label><img [src]="imgURL" height="200"
+                                *ngIf="imgURL"><input type="file" name="fileToUpload" (change)="onFileChanged($event)"
+                                id="fileToUpload">
+                        <td><input type="text" id="namprod"></td>
+                        <td><input type="text" id="descprod"></td>
+                        <td><input type="text" id="priprod"></td>
+                        <td><input type="text" id="discprod" value="0"></td>
+                        <td><input type="text" id="quantity"></td>
+                        <td><button type="submit" class="btn btn-success mr-2" (click)="addProduct()"> Ajouter un
+                                produit</button> </td>
+
                     </tr>
                 </tbody>
             </table>
