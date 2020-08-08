@@ -7,23 +7,24 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-
+  // url des web services d'authentification
   private _loginUrl = "https://my4storeapi.herokuapp.com/login";
   private _registerUrl="https://my4storeapi.herokuapp.com/register";
   
 
   constructor(private http: HttpClient, private router: Router) { }
-
+  
+  // login function 
   login(user) {
     return this.http.post<any>(this._loginUrl, user);
   }
-
+  // register function
   register(user) {
     return this.http.post<any>(this._registerUrl, user);
   }
 
   
-
+  // function to check Logged in status
   isLoggedIn(){
     let token = localStorage.getItem('myToken');
     if (!token) {
@@ -33,37 +34,4 @@ export class AuthService {
     }
   }
 
-  isStudent(){
-    let token = localStorage.getItem('myToken');
-    if (!token) {
-      return false;
-    }else {
-
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);
-  
-      if (decodedToken.role == "student") {
-        return true;
-      }else {
-        return false
-      }
-    }
-  }
-
-  isAdmin(){
-    let token = localStorage.getItem('myToken');
-    if (!token) {
-      return false;
-    }else {
-      //isLoggedIn , isStudent
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);
-  
-      if (decodedToken.role == "admin") {
-        return true;
-      }else {
-        return false
-      }
-    }
-  }
 }

@@ -1,5 +1,5 @@
 export class User {
-    
+  //Model of USER   
     constructor(
         private Name?: String,
 

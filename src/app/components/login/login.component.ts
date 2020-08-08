@@ -6,7 +6,7 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-
+// Login component handles the connection of users
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder,private _authService:AuthService,private router:Router) {
-    let formControls = {
+    let formControls = {      //initialize the Form controls to specify the required and correct fomat of inputs 
       Email: new FormControl('',[
         Validators.required,
         Validators.email
@@ -32,19 +32,19 @@ export class LoginComponent implements OnInit {
     this.loginForm = fb.group(formControls);
   }
 
-  get Email(){return this.loginForm.get('Email');}
-  get Password(){return this.loginForm.get('Password');}
+  get Email(){return this.loginForm.get('Email');}  //get email from user inputs
+  get Password(){return this.loginForm.get('Password');}  //get password from user inputs
 
 
   ngOnInit(): void {
   }
 
+  // Call Login service for authentication 
   login(){
     console.log(this.loginForm.value);
     let data = this.loginForm.value;
 
-    let user = new User
-
+    
     this._authService.login(data).subscribe(
       (result)=>{
         console.log(result);
@@ -53,9 +53,9 @@ export class LoginComponent implements OnInit {
         const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(token);
   
-      if (decodedToken.admin == "admin") {
+      if (decodedToken.admin == "admin") {  //if admin redirect to manage products list
         this.router.navigate(['/produits']);
-      }else {
+      }else {               // if customer redirect to all products list and initialize the necessary values( nbr of products,the list of products  to be commanded )
          var nbr=0;
         localStorage.setItem("qte",JSON.stringify(nbr));
         let achats=[];

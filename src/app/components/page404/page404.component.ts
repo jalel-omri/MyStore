@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./page404.component.css']
 })
 export class Page404Component implements OnInit {
-
+  // 404 page when the url requested is not found and rediirect to home page
   constructor( private _as: AuthService, private router: Router) { }
 
   ngOnInit(): void {

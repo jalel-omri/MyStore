@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./page401.component.css']
 })
 export class Page401Component implements OnInit {
-
+  //Not authorized page to show when guards deny access to admin/customer to some non authorized pages
   constructor( private _as: AuthService, private router: Router) { }
 
   ngOnInit(): void {

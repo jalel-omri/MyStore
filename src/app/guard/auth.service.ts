@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
   constructor(private _router: Router) {
 
   }
-
+  //to access components user must login first
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

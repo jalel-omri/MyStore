@@ -11,6 +11,8 @@ export class AdminGuard implements CanActivate {
   constructor(private _router: Router) {
 
   }
+  
+  // Guards to disallow customer to access admin services
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -21,14 +23,14 @@ export class AdminGuard implements CanActivate {
     if (token) {
       let role = decodedToken.admin;
 
-      if (role == "admin") {
+      if (role == "admin") {    //if admin then allow access
         return true;
       } else {
-        this._router.navigate(['/UNAUTHORIZED']);
+        this._router.navigate(['/UNAUTHORIZED']);   // if not admin disallow access and redirect to unauthorized page
         return false;
       }
     } else {
-      this._router.navigate(['/login']);
+      this._router.navigate(['/login']);    //if not logged in then redirect to login page
       return false;
     }
   }

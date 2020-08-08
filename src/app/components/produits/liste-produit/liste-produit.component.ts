@@ -11,21 +11,21 @@ import { toBase64String } from '@angular/compiler/src/output/source_map';
   styleUrls: ['./liste-produit.component.css']
 })
 export class ListeProduitComponent implements OnInit {
-   produits=[];
-   Cart=0;
+   produits=[];   //contain the list of all products
+   Cart=0;        //number of bought product 
   
-   admin=false;
-   command=1;
-   achats=[];
-   public selectedFile;
-   receivedImageData: any;
-   base64Data: any;
-  convertedImage: any;
-  imgURL: any;
+   admin=false;   //boolean attribute indicates whether the user is admin or not initialized to false
+   command=1;     //contain number of product exemplaire to be added to cart 
+   achats=[];     //list of bought products
+   public selectedFile; // contain the image of the new product
+   base64Data: any;     //contain image of the product in 64 base format
+  
+  imgURL: any;    //contains the url of the new product image
   constructor(private _productService:ProduitsService) { }
 
   ngOnInit(): void {
-    this.isAdmin();
+    this.isAdmin();   //intialize admin/user indicator
+    //get All products
     this._productService.getAllProducts().subscribe(
       (produitsFromDb)=>{
         this.produits = produitsFromDb
@@ -33,9 +33,9 @@ export class ListeProduitComponent implements OnInit {
         let achats=JSON.parse(localStorage.getItem("achats"));
       
         this.produits.forEach(prod => {
-          prod.inCart=false;
+          prod.inCart=false;    //initialize inCart attribute for each products as its not selected
           if(achats!=null){
-          for(let element of achats){
+          for(let element of achats){   //loop the achat list to determine which products are already selected
             if(element.id==prod.id)
              prod.inCart=true;
             }
@@ -47,16 +47,16 @@ export class ListeProduitComponent implements OnInit {
         console.log(error);
       }
     )
-    
+    //update number of selected product and store the value in the local storage
     let nbCommand=0;nbCommand
     nbCommand=nbCommand+JSON.parse(localStorage.getItem("qte"));
     this.Cart=nbCommand;
     localStorage.setItem("qte",nbCommand.toString());
   }
-
+  //funciton to determine admin/user status
   isAdmin(){
     const helper = new JwtHelperService();
-    let token=localStorage.getItem("myToken");
+    let token=localStorage.getItem("myToken");  // using the generated token to decode the informations
     const decodedToken = helper.decodeToken(token);
 
     if (decodedToken.admin == "admin") {
@@ -68,6 +68,7 @@ export class ListeProduitComponent implements OnInit {
 
   }
 
+  //Here is the functions implemented to add a selected product to the Cart
   addToCart(i){
     
     let achats=JSON.parse(localStorage.getItem("achats"));
@@ -79,7 +80,7 @@ export class ListeProduitComponent implements OnInit {
       this.achats=achats;
       localStorage.removeItem("achats");
       localStorage.setItem("achats",JSON.stringify(achats));
-  //  document.getElementById("nbProd").textContent=this.cart.toString();
+
       this.produits[i].inCart=true;
 
       let nbCommand=1;
@@ -90,7 +91,7 @@ export class ListeProduitComponent implements OnInit {
     }
     
   }
-
+  // function to drop a product from the cart
   dropFromCart(i,produit){
     this.produits[i].inCart=false;
     let achats=JSON.parse(localStorage.getItem("achats"));
@@ -107,6 +108,7 @@ export class ListeProduitComponent implements OnInit {
     localStorage.setItem("qte",nbCommand.toString());
   }
 
+  //function that deletes a product listed
   deleteProduit(produit){
       let indice = this.produits.indexOf(produit);
       this.produits.splice(indice, 1);
@@ -119,10 +121,12 @@ export class ListeProduitComponent implements OnInit {
       )
     
   }
+
+  //function to create and add new product in the store
   addProduct(){
     
     
-    
+   // extract the new product details inserted by the admin from the home page 
    var nom= document.getElementById("namprod") as HTMLInputElement ;
    let namprod=nom.value;
     var description=document.getElementById("descprod") as HTMLInputElement;
@@ -138,6 +142,7 @@ export class ListeProduitComponent implements OnInit {
     if(this.base64Data[1]==null||namprod==null||descprod==null||priprod==null){
       alert("veuillez donner toutes les informations nécessaires du produits !");
     }else{
+      //initialize the product caracteristics
       let  produit={
         "Improd":this.base64Data[1],
         "Namprod": namprod,
@@ -158,6 +163,8 @@ export class ListeProduitComponent implements OnInit {
     }
 
   }
+
+  //Funtion to upload the image of the new product
   public  onFileChanged(event) {
     console.log(event);
     this.selectedFile = event.target.files[0];

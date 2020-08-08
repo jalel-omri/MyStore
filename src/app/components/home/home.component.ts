@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cover.css']
 })
 export class HomeComponent implements OnInit {
-
+  // the Home page component
   constructor() { }
 token:any;
   ngOnInit(): void {

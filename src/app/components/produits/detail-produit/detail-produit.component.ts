@@ -12,31 +12,34 @@ import { ProduitsService } from 'src/app/services/produits.service';
 })
 export class DetailProduitComponent implements OnInit {
 
-  idProd:String;
-  idUser:String;
-  command=1;
-   produit=null;
+  idProd:String;  // the Id of the selected product
+  
+  command=1;    //Initialize the quantity to be bought to 1 exemplaire
+   produit=null;  //Initialize the selected product to null
    
-  achats=[];
+  achats=[];  // list that contains all commanded products
   constructor(private _prodServ:ProduitsService,private route:ActivatedRoute) {
     
    }
 
   ngOnInit(): void {
 
-    
+    // Set the Id of the selected product
      this.idProd = this.route.snapshot.paramMap.get('Idprod');
+     //  Set the list of products to be commanded from the local storage
      this.achats=JSON.parse(localStorage.getItem("achats"));
-
+    //Call the service to return the selected product by id
     this.getProduit();
     
-   
+    //initialize the total number of commands and save it to local storage
     let nbCommand=0;
     nbCommand=nbCommand+JSON.parse(localStorage.getItem("qte"));
     localStorage.setItem("qte",nbCommand.toString());
   }
 
+  //function that returns the selected product by id 
   getProduit() {
+    // call get product by od service
     this._prodServ.getProduit(this.idProd).subscribe(
       res => {
         this.produit = res;
@@ -54,12 +57,14 @@ export class DetailProduitComponent implements OnInit {
       }
     )
   }
+
+  //Increment the number of exemplaire of that product
   commander(){
     this.command=this.command+1;
     document.getElementById("qte").setAttribute("value",this.command
     .toString());
   }
-
+  // Decrease the number of exemplaire of that product
   supprimer(){
     if(this.command!=1){
     this.command=this.command-1;
@@ -68,6 +73,8 @@ export class DetailProduitComponent implements OnInit {
 
     }
   }
+
+  //Function to Add that product to the command list
   addToCart(){
     
     
@@ -90,7 +97,7 @@ export class DetailProduitComponent implements OnInit {
     
   }
 }
-
+  //remove that product from the command list
   removeFromCart(){
     this.produit.inCart=false;
     let achats=JSON.parse(localStorage.getItem("achats"));

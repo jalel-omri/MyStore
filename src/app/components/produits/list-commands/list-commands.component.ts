@@ -7,10 +7,11 @@ import { ProduitsService } from 'src/app/services/produits.service';
   styleUrls: ['./list-commands.component.css']
 })
 export class ListCommandsComponent implements OnInit {
-
-  commands=[];
+  
+  commands=[];  //contains the liste of all commands
   
   constructor(private _prodServ:ProduitsService) {
+    // Use the GetAllCommands service
     this._prodServ.getAllCommand().subscribe(
       (commandFromDb)=>{
         this.commands = commandFromDb

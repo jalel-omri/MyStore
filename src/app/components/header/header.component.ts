@@ -8,17 +8,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  
+  // the Header of my application
   constructor(private router:Router ) { }
-token=false;
+  token=false;    //initialize the token to null
   ngOnInit(): void {
+    //extract the token when found in the local storage
     let token=localStorage.getItem("myToken");
     if(token){
       this.token=true;
     }
     
   }
-
+  //Logout function and delete of all attributes related to the current user
   logout(){
     localStorage.removeItem("myToken");
     localStorage.removeItem("qte");
