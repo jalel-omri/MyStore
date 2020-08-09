@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
 
+Mon application (Back-end & Front-end) est déployer sur Heroku :https://my4store.herokuapp.com/
+
 Ce projet est sous la forme d'un site de vente en ligne , il comporte deux parties essentielles:
         - interfaces conçues aux administrateurs
         - interfaces conçues aux acheteurs
