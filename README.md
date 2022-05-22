@@ -31,3 +31,5 @@ qui indiquent qu'il s'agit des droits réservés aux administrateurs.
 
 Concernant la partie Back-end j'ai utilisé une base de donnée MSQL Server ou encore Postgres SQL et elle est implémentée 
 avec ASP.NET Core et c#.
+
+
