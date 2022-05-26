@@ -39,5 +39,6 @@ Footer : Custom footer message to commit
 Change from Github !
 
 conflict HAHAHA
+To generate a conflict hhhhh
 
 
